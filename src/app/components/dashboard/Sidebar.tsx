@@ -39,7 +39,7 @@ const menuItems = [
     url: "/dashboard/course-management",
     icon: Book,
   },
-  { title: "Quản lý User", url: "#", icon: Users },
+  { title: "Quản lý User", url: "/dashboard/user-management", icon: Users },
   { title: "Hỗ trợ", url: "#", icon: HelpCircle },
 ];
 

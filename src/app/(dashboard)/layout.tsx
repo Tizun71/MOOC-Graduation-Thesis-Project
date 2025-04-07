@@ -9,7 +9,7 @@ export default function DashboardLayout({
   return (
     <div className="flex h-screen">
       <SidebarProvider>
-        <div className="flex">
+        <div className="flex w-full">
           {/* Sidebar */}
           <DashboardSidebar />
           {/* Nội dung chính */}
