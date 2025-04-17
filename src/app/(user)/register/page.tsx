@@ -1,3 +1,5 @@
+"use client";
+
 // pages/sign-up.js
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -5,7 +7,35 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import Link from "next/link";
 
+import { useState } from "react";
+import { authApi } from "@/lib/api-client";
+
 export default function SignUp() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function handleLoginClick() {
+    if (!username || !email) {
+      setErrorMessage("Vui lòng nhập đầy đủ thông tin.");
+      return;
+    }
+
+    try {
+      await authApi.register({
+        username,
+        email,
+      });
+    } catch (error) {
+      console.log("failed to login", error);
+      setErrorMessage(
+        "Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng thử lại."
+      );
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="flex max-w-4xl w-full mx-auto p-6">
@@ -35,32 +65,44 @@ export default function SignUp() {
           {/* Form Inputs */}
           <div className="space-y-4">
             <div>
-              <Input placeholder="Full name" className="w-full" />
+              <Input
+                placeholder="First Name"
+                className="w-full"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
             </div>
             <div>
-              <Input placeholder="Email" type="email" className="w-full" />
+              <Input
+                placeholder="Last Name"
+                className="w-full"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+            <div>
+              <Input
+                placeholder="Username"
+                className="w-full"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div>
+              <Input
+                placeholder="Email"
+                type="email"
+                className="w-full"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
           </div>
 
           {/* Continue Button */}
-          <Button className="w-full mt-6">Tiếp tục với Email</Button>
-
-          {/* Alternative Sign-Up Options */}
-          <div className="mt-4">
-            <p className="text-sm text-gray-600 text-center">
-              Hoặc là đăng nhập với
-            </p>
-            <div className="flex justify-center space-x-4 mt-2">
-              <Button variant="outline" className="p-2">
-                <Image
-                  src="https://kltn-mooc-blockchain.s3.ap-southeast-1.amazonaws.com/images/logo/goole_logo.png"
-                  alt="Google"
-                  width={24}
-                  height={24}
-                />
-              </Button>
-            </div>
-          </div>
+          <Button className="w-full mt-6" onClick={handleLoginClick}>
+            Tiếp tục với Email
+          </Button>
 
           {/* Terms and Privacy Policy */}
           <p className="text-xs text-gray-500 text-center mt-4">

@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Home,
   Inbox,
   Settings,
   Book,
@@ -12,6 +11,8 @@ import {
   ChevronDown,
   Bell,
   Notebook,
+  Clock10,
+  ChartArea,
 } from "lucide-react";
 import {
   Sidebar,
@@ -34,17 +35,16 @@ import {
 import Link from "next/link";
 
 const menuItems = [
-  { title: "Dashboard", url: "/dashboard", icon: Home },
   {
     title: "Quản lý Khóa học",
     url: "/dashboard/course-management",
     icon: Book,
   },
-  { title: "Quản lý User", url: "/dashboard/user-management", icon: Users },
+  { title: "Giao tiếp", url: "/dashboard/user-management", icon: Users },
   {
-    title: "Quản lý Quyền hạn",
+    title: "Hiệu suất",
     url: "/dashboard/role-management",
-    icon: Notebook,
+    icon: ChartArea,
   },
   { title: "Hỗ trợ", url: "#", icon: HelpCircle },
 ];
@@ -55,7 +55,7 @@ const accountItems = [
   { title: "Cài đặt", url: "#", icon: Settings },
 ];
 
-export function DashboardSidebar() {
+export function InstructorSidebar() {
   return (
     <Sidebar variant="sidebar" collapsible="offcanvas">
       <SidebarHeader>

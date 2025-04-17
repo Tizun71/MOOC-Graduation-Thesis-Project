@@ -10,9 +10,11 @@ import { Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 const UserHeader = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
   return (
     <div>
       <header className="border-b">
@@ -56,8 +58,10 @@ const UserHeader = () => {
               <ShoppingCart className="mr-2" />
               Cart
             </Button>
-            <Button variant="outline">Log in</Button>
-            <Button>Sign up</Button>
+            <Button variant="outline" onClick={() => router.push("/login")}>
+              Log in
+            </Button>
+            <Button onClick={() => router.push("/register")}>Sign up</Button>
           </div>
         </div>
       </header>
