@@ -10,8 +10,6 @@ import {
   User2,
   ChevronDown,
   Bell,
-  Notebook,
-  Clock10,
   ChartArea,
 } from "lucide-react";
 import {

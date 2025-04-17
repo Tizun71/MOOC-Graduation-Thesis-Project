@@ -14,7 +14,7 @@ export const authApi = {
                 Cookies.set('refreshToken', refreshToken, { expires: 7 });
 
                 const decodedToken = jwtDecode(accessToken);
-                var roles =  String(decodedToken.role);
+                const roles =  String(decodedToken.role);
                 console.log(roles.substring(1, roles.length - 1).split(',').map(role => role.trim()));
                 if (roles.includes("ADMIN")) {
                     window.location.href = '/dashboard';
