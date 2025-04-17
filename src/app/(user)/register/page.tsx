@@ -25,6 +25,8 @@ export default function SignUp() {
 
     try {
       await authApi.register({
+        firstName,
+        lastName,
         username,
         email,
       });
@@ -98,7 +100,9 @@ export default function SignUp() {
               />
             </div>
           </div>
-
+          {errorMessage && (
+            <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
+          )}
           {/* Continue Button */}
           <Button className="w-full mt-6" onClick={handleLoginClick}>
             Tiếp tục với Email

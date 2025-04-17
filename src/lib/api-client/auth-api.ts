@@ -1,7 +1,7 @@
 import { LoginPayLoad, RegisterPayLoad } from "@/models"
 import axiosClient from "./axios-client"
 import Cookies from "js-cookie"
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 export const authApi = {
     login(payload: LoginPayLoad) {
@@ -13,8 +13,8 @@ export const authApi = {
 
                 Cookies.set('refreshToken', refreshToken, { expires: 7 });
 
-                const decodedToken = jwtDecode(accessToken);
-                const roles =  String(decodedToken.role);
+                const decodedToken = jwtDecode(accessToken) as JwtPayload & { role: string | string[] };
+                const roles = typeof decodedToken.role === 'string' ? decodedToken.role : decodedToken.role.join(',');
                 console.log(roles.substring(1, roles.length - 1).split(',').map(role => role.trim()));
                 if (roles.includes("ADMIN")) {
                     window.location.href = '/dashboard';
